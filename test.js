@@ -4,12 +4,12 @@ import { htmlReport } from "https://raw.githubusercontent.com/benc-uk/k6-reporte
 import { textSummary } from "https://jslib.k6.io/k6-summary/0.0.1/index.js";
 import { check } from 'k6';
 
-export const options={
-    vus:10,
-    iterations:20
+export const options = {
+    vus: 10,
+    iterations: 20
 }
 
-export default function() {
+export default function () {
     let res = http.get("https://test.k6.io/");
     check(res, {
         'status was 200': (r) => r.status === 200
@@ -19,7 +19,7 @@ export default function() {
 
 export function handleSummary(data) {
     return {
-      "./report/result.html": htmlReport(data),
-      stdout: textSummary(data, { indent: " ", enableColors: true }),
+        "./report/result.html": htmlReport(data),
+        stdout: textSummary(data, { indent: " ", enableColors: true }),
     };
 }

@@ -4,7 +4,13 @@ import { check } from 'https://jslib.k6.io/k6-utils/1.5.0/index.js';
 export const options = {
     scenarios: {
         ui: {
-            executor: 'shared-iterations',
+            executor: 'ramping-vus',
+            exec: 'browserTest',
+            stages: [
+                { duration: '5s', target: 2 },
+                { duration: '10s', target: 2 },
+                { duration: '5s', target: 0 }
+            ],
             options: {
                 browser: {
                     type: 'chromium',
@@ -17,7 +23,7 @@ export const options = {
     },
 };
 
-export default async function () {
+export async function browserTest() {
     const context = await browser.newContext();
     const page = await context.newPage();
 

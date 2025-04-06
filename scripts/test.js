@@ -6,7 +6,7 @@ import { check } from 'k6';
 
 export const options = {
     vus: 10,
-    duration: '1m',
+    duration: '10s',
 }
 
 export default function () {
